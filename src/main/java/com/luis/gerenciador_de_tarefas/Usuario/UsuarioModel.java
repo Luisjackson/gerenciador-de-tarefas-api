@@ -1,4 +1,4 @@
-package com.luis.gerenciador_de_tarefas.entities;
+package com.luis.gerenciador_de_tarefas.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 @Entity // Transforma a classe em uma entidade do DB
 @Table(name = "Usuario")
-public class Usuario {
+public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto Increment do DB
@@ -20,14 +20,14 @@ public class Usuario {
     private String nome;
     private String telefone;
 
-    public Usuario(String email, String senha, String nome, String telefone) {
+    public UsuarioModel(String email, String senha, String nome, String telefone) {
         this.email = email;
         this.senha = senha;
         this.nome = nome;
         this.telefone = telefone;
     }
 
-    public Usuario() {
+    public UsuarioModel() {
     }
 
 
