@@ -1,10 +1,14 @@
 package com.luis.gerenciador_de_tarefas.Usuario;
 
+import com.luis.gerenciador_de_tarefas.Tarefa.TarefaModel;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.util.List;
 
 @Entity // Transforma a classe em uma entidade do DB
 @Table(name = "Usuario")
@@ -19,6 +23,7 @@ public class UsuarioModel {
     private String senha;
     private String nome;
     private String telefone;
+    private List<TarefaModel> tarefas;
 
     public UsuarioModel(String email, String senha, String nome, String telefone) {
         this.email = email;
