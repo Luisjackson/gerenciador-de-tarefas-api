@@ -2,14 +2,15 @@ package com.luis.gerenciador_de_tarefas.Tarefa;
 
 import java.time.LocalDate;
 
-import javax.xml.crypto.Data;
-
-import jakarta.persistence.Table;
+import com.luis.gerenciador_de_tarefas.Usuario.UsuarioModel;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Tarefa")
@@ -24,8 +25,11 @@ public class TarefaModel {
     private String status;
     private LocalDate data_inicio;
     private LocalDate data_final;
-    private Long Usuario_idUsuario; // FK aqui ?
-    
+
+    @ManyToOne // Muitas tarefas podem pertencer a um único usuário
+    @JoinColumn(name = "Usuario_idUsuario") // FK
+    private UsuarioModel usuario; 
+
     public TarefaModel(String titulo, String descricao, String status, LocalDate data_inicio, LocalDate data_final) {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -90,18 +94,17 @@ public class TarefaModel {
     }
 
 
-    public void setData_final(Data LocalDate_final) {
-        this.data_final = data_final;
+    public void setData_final(LocalDate data_final) {
+            this.data_final = data_final;
+        }
+
+
+    public UsuarioModel getUsuario() { 
+        return usuario; 
     }
 
-
-    public Long getUsuario_idUsuario() {
-        return Usuario_idUsuario;
-    }
-
-
-    public void setUsuario_idUsuario(Long usuario_idUsuario) {
-        Usuario_idUsuario = usuario_idUsuario;
+    public void setUsuario(UsuarioModel usuario) { 
+        this.usuario = usuario; 
     }
 
     
