@@ -1,5 +1,7 @@
 package com.luis.gerenciador_de_tarefas.Tarefa;
 
-public class TarefaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TarefaRepository extends JpaRepository<TarefaModel, Long> { 
 
 }
