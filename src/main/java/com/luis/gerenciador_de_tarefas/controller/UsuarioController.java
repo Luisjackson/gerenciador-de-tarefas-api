@@ -1,4 +1,4 @@
-package com.luis.gerenciador_de_tarefas.Usuario;
+package com.luis.gerenciador_de_tarefas.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

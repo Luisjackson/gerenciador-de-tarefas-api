@@ -1,8 +1,6 @@
-package com.luis.gerenciador_de_tarefas.Usuario;
+package com.luis.gerenciador_de_tarefas.model;
 
 import java.util.List;
-
-import com.luis.gerenciador_de_tarefas.Tarefa.TarefaModel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

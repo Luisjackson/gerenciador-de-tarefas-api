@@ -1,8 +1,6 @@
-package com.luis.gerenciador_de_tarefas.Tarefa;
+package com.luis.gerenciador_de_tarefas.model;
 
 import java.time.LocalDate;
-
-import com.luis.gerenciador_de_tarefas.Usuario.UsuarioModel;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
