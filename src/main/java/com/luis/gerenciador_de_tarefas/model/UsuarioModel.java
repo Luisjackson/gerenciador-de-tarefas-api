@@ -29,6 +29,7 @@ public class UsuarioModel {
     private String senha;
     private String nome;
     private String telefone;
+    private int idade;
 
     @OneToMany(mappedBy="usuario") // Um usuario pode ter varias tarefas
     private List<TarefaModel> tarefas;
