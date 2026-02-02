@@ -1,11 +1,12 @@
 package com.luis.gerenciador_de_tarefas.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.luis.gerenciador_de_tarefas.dto.TarefaDTO;
+import com.luis.gerenciador_de_tarefas.mapper.TarefaMapper;
 import com.luis.gerenciador_de_tarefas.model.TarefaModel;
 import com.luis.gerenciador_de_tarefas.repository.TarefaRepository;
 
@@ -13,9 +14,12 @@ import com.luis.gerenciador_de_tarefas.repository.TarefaRepository;
 public class TarefaService {
 
     private TarefaRepository tarefaRepository; // Injetar dependencia para Fazer comunicação do service com repository
+    private TarefaMapper tarefaMapper; 
 
-    public TarefaService(TarefaRepository tarefaRepository) {
+
+    public TarefaService(TarefaRepository tarefaRepository, TarefaMapper tarefaMapper) {
         this.tarefaRepository = tarefaRepository;
+        this.tarefaMapper = tarefaMapper;
     }
 
     public List<TarefaModel> mostrarTodasTarefas(){
@@ -27,8 +31,10 @@ public class TarefaService {
         return tarefaPorId.orElse(null);
     }
 
-    public TarefaModel criarTarefa(TarefaModel tarefa){
-        return tarefaRepository.save(tarefa);
+    public TarefaDTO criarTarefa(TarefaDTO tarefaDTO){
+        TarefaModel tarefa = tarefaMapper.map(tarefaDTO);
+        tarefa =  tarefaRepository.save(tarefa);
+        return tarefaMapper.map(tarefa);
     }
 
     public void deletarTarefaPorId(Long id){

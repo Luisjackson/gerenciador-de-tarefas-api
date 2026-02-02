@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.luis.gerenciador_de_tarefas.dto.TarefaDTO;
 import com.luis.gerenciador_de_tarefas.model.TarefaModel;
 import com.luis.gerenciador_de_tarefas.repository.TarefaRepository;
 import com.luis.gerenciador_de_tarefas.service.TarefaService;
@@ -31,7 +32,7 @@ public class TarefaController {
 
     //Adicionar 
     @PostMapping("/criarTarefa")
-    public TarefaModel criarTarefa(@RequestBody TarefaModel tarefa){
+    public TarefaDTO criarTarefa(@RequestBody TarefaDTO tarefa){
         return tarefaService.criarTarefa(tarefa);
     }
     
