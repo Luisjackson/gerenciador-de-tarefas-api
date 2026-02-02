@@ -7,26 +7,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luis.gerenciador_de_tarefas.model.TarefaModel;
+import com.luis.gerenciador_de_tarefas.repository.TarefaRepository;
 import com.luis.gerenciador_de_tarefas.service.TarefaService;
 
 @RestController
 @RequestMapping // Define a rota base que os metodos desta classe vão seguir
 public class TarefaController {
 
+    private final TarefaRepository tarefaRepository;
+
     // Injeção de dependencia do service p se comunicar com a camada de serviço 
     private TarefaService tarefaService;
-    public TarefaController(TarefaService tarefaService){
+    
+    public TarefaController(TarefaService tarefaService, TarefaRepository tarefaRepository){
         this.tarefaService = tarefaService;
+        this.tarefaRepository = tarefaRepository;
     }
 
     //Adicionar 
-    @PostMapping("/criar")
-    public String criarTarefa(){
-        return "Tarefa Criada";
+    @PostMapping("/criarTarefa")
+    public TarefaModel criarTarefa(@RequestBody TarefaModel tarefa){
+        return tarefaService.criarTarefa(tarefa);
     }
     
     // Mostrar
@@ -37,7 +43,7 @@ public class TarefaController {
 
     // Mostrar tarefa por ID
     @GetMapping("/listarTarefaPorID/{id}")
-    public TarefaModel mostrarTarefaPorId(@PathVariable Long id){ // PathVariable para dizer que o argumento é uma variavel do caminho 
+    public TarefaModel mostrarTarefaPorId(@PathVariable Long id){ // PathVariable para dizer que o argumento é uma variavel do caminho
         return tarefaService.mostrarTarefaPorId(id);
     }
 

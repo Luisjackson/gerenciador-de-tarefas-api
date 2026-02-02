@@ -1,5 +1,6 @@
 package com.luis.gerenciador_de_tarefas.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,5 +27,9 @@ public class TarefaService {
         return tarefaPorId.orElse(null);
     }
 
+    public TarefaModel criarTarefa(TarefaModel tarefa){
+        return tarefaRepository.save(tarefa);
+    }
 
-}
+
+}           
