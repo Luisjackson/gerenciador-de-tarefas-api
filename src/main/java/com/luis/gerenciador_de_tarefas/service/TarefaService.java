@@ -1,6 +1,7 @@
 package com.luis.gerenciador_de_tarefas.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,14 @@ public class TarefaService {
         this.tarefaRepository = tarefaRepository;
     }
 
-    // Listar todas as tarefas
     public List<TarefaModel> mostrarTodasTarefas(){
         return tarefaRepository.findAll();
     }
+
+    public TarefaModel mostrarTarefaPorId(Long id){
+        Optional<TarefaModel> tarefaPorId = tarefaRepository.findById(id);
+        return tarefaPorId.orElse(null);
+    }
+
 
 }
