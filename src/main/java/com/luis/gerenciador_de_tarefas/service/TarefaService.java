@@ -36,4 +36,13 @@ public class TarefaService {
     }
 
 
+    public TarefaModel alterarTarefaPorId(Long id, TarefaModel tarefaAtualizada){
+        if(tarefaRepository.existsById(id)){
+            tarefaAtualizada.setIdTarefa(id);
+            return tarefaRepository.save(tarefaAtualizada);
+        }
+        return null;
+    }
+
+
 }           
