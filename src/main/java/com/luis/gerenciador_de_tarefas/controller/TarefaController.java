@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.luis.gerenciador_de_tarefas.dto.TarefaDTO;
-import com.luis.gerenciador_de_tarefas.model.TarefaModel;
 import com.luis.gerenciador_de_tarefas.repository.TarefaRepository;
 import com.luis.gerenciador_de_tarefas.service.TarefaService;
 
@@ -38,13 +37,13 @@ public class TarefaController {
     
     // Mostrar
     @GetMapping("/listarTarefas")
-    public List<TarefaModel> mostrarTodasTarefas(){
+    public List<TarefaDTO> mostrarTodasTarefas(){
         return tarefaService.mostrarTodasTarefas();
     }
 
     // Mostrar tarefa por ID
     @GetMapping("/listarTarefaPorID/{id}")
-    public TarefaModel mostrarTarefaPorId(@PathVariable Long id){ // PathVariable para dizer que o argumento é uma variavel do caminho
+    public TarefaDTO mostrarTarefaPorId(@PathVariable Long id){ // PathVariable para dizer que o argumento é uma variavel do caminho
         return tarefaService.mostrarTarefaPorId(id);
     }
 
@@ -56,7 +55,7 @@ public class TarefaController {
 
     //Alterar
     @PutMapping("/alterarTarefaPorId/{id}")
-    public TarefaModel alterarTarefaPorId(@PathVariable Long id, @RequestBody TarefaModel tarefaAtualizada){
+    public TarefaDTO alterarTarefaPorId(@PathVariable Long id, @RequestBody TarefaDTO tarefaAtualizada){
         return tarefaService.alterarTarefaPorId(id, tarefaAtualizada);
     }
 

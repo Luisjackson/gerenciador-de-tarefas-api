@@ -2,6 +2,7 @@ package com.luis.gerenciador_de_tarefas.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -22,13 +23,17 @@ public class TarefaService {
         this.tarefaMapper = tarefaMapper;
     }
 
-    public List<TarefaModel> mostrarTodasTarefas(){
-        return tarefaRepository.findAll();
+    public List<TarefaDTO> mostrarTodasTarefas() { // OK
+        List<TarefaModel> tarefas = tarefaRepository.findAll();
+        
+        return tarefas.stream()
+                .map(tarefaMapper::map)
+                .collect(Collectors.toList()); 
     }
 
-    public TarefaModel mostrarTarefaPorId(Long id){
+    public TarefaDTO mostrarTarefaPorId(Long id){ // ok
         Optional<TarefaModel> tarefaPorId = tarefaRepository.findById(id);
-        return tarefaPorId.orElse(null);
+        return tarefaPorId.map(tarefaMapper::map).orElse(null);
     }
 
     public TarefaDTO criarTarefa(TarefaDTO tarefaDTO){
@@ -42,13 +47,16 @@ public class TarefaService {
     }
 
 
-    public TarefaModel alterarTarefaPorId(Long id, TarefaModel tarefaAtualizada){
-        if(tarefaRepository.existsById(id)){
+    public TarefaDTO alterarTarefaPorId(Long id, TarefaDTO tarefaDTO){
+        Optional<TarefaModel> tarefaExistente = tarefaRepository.findById(id);
+        if(tarefaExistente.isPresent()){
+            TarefaModel tarefaAtualizada = tarefaMapper.map(tarefaDTO);
             tarefaAtualizada.setIdTarefa(id);
-            return tarefaRepository.save(tarefaAtualizada);
+            TarefaModel tarefaSalva = tarefaRepository.save(tarefaAtualizada);
+            return tarefaMapper.map(tarefaSalva);
+
         }
         return null;
     }
-
-
-}           
+    
+}
